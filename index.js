@@ -6,15 +6,24 @@ const bodyparser = require('body-parser');
 
 // Initializing express app
 var app = express();
-app.use(bodyparser.json());
+
+// Use local files
+var path= require('path');
+
+// File stream module
+var fs = require('fs');
+
+app.use(express.static(__dirname + '/images'));
 
 // Setup for MySQL connection
 var mysqlConnection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'imdb'
+    host: 'cmsc461project.crie639zueql.us-east-1.rds.amazonaws.com',
+    user: 'admin',
+    password: 'password',
+    database: 'cmsc461project'
 });
+
+console.log(__dirname);
 
 // Establishing (and testing) MySQL connection
 mysqlConnection.connect((err) => {
@@ -22,13 +31,13 @@ mysqlConnection.connect((err) => {
         console.log('DB connection success');
     else
         console.log('DB connection failure: ' + JSON.stringify(err, undefined, 2));
-})
+});
 
 app.listen(3000, () => console.log('Express server is running at port number: 3000'));
 
 // Get the first 10 rows of the people table
-app.get('/people', (req, res) => {
-    mysqlConnection.query('SELECT * FROM people LIMIT 10', (err, rows, fields) => {
+app.get('/songs', (req, res) => {
+    mysqlConnection.query('SELECT title FROM song_data LIMIT 1000', (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
@@ -36,6 +45,47 @@ app.get('/people', (req, res) => {
     })
 });
 
-// Stopped at 12:42 - www.youtube.com/watch?v=4fWWn2Pe2Mk
-// Commenting
+app.get('/home', (req, res) => {
+  console.log('request was made: ' + req.url);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/html/home.html', 'utf8');
+  myReadStream.pipe(res);
+});
 
+app.get('/title', (req, res) => {
+  console.log('request was made: ' + req.url);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/html/title.html', 'utf8');
+  myReadStream.pipe(res);
+});
+
+app.get('/artist', (req, res) => {
+  console.log('request was made: ' + req.url);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/artist.html', 'utf8');
+  myReadStream.pipe(res);
+});
+
+app.get('/genre', (req, res) => {
+  console.log('request was made: ' + req.url);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/genre.html', 'utf8');
+  myReadStream.pipe(res);
+});
+
+app.get('/year', (req, res) => {
+  console.log('request was made: ' + req.url);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/year.html', 'utf8');
+  myReadStream.pipe(res);
+});
+
+app.get('/lyrics', (req, res) => {
+  console.log('request was made: ' + req.url);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/lyrics.html', 'utf8');
+  myReadStream.pipe(res);
+});
+
+
+// Stopped at 12:42 - www.youtube.com/watch?v=4fWWn2Pe2Mk
