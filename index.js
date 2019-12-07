@@ -1,4 +1,3 @@
-
 // Importing libraries/modules
 const mysql = require('mysql');
 const express = require('express');
@@ -17,9 +16,9 @@ app.use(express.static(__dirname + '/images'));
 
 // Setup for MySQL connection
 var mysqlConnection = mysql.createConnection({
-    host: 'cmsc461project.crie639zueql.us-east-1.rds.amazonaws.com',
-    user: 'admin',
-    password: 'password',
+    host: 'localhost',
+    user: 'root',
+    password: '',
     database: 'cmsc461project'
 });
 
@@ -37,9 +36,23 @@ app.listen(3000, () => console.log('Express server is running at port number: 30
 
 // Get the first 10 rows of the people table
 app.get('/songs', (req, res) => {
-    mysqlConnection.query('SELECT title FROM song_data LIMIT 1000', (err, rows, fields) => {
+    mysqlConnection.query('SELECT title FROM song_data LIMIT 1', (err, rows, fields) => {
         if (!err)
-            res.send(rows);
+            //res.send(rows);
+            rows.forEach(function(result){
+              res.send(result.title);
+            });
+        else
+            console.log(err);
+    })
+});
+app.get('/songs/:id', (req, res) => {
+    mysqlConnection.query('SELECT * FROM song_data WHERE id = ?', [req.params.id], (err, rows, fields) => {
+        if (!err)
+            //res.send(rows);
+            rows.forEach(function(result){
+              res.send(result);
+            });
         else
             console.log(err);
     })
@@ -62,28 +75,28 @@ app.get('/title', (req, res) => {
 app.get('/artist', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/artist.html', 'utf8');
+  var myReadStream = fs.createReadStream(__dirname + '/html/artist.html', 'utf8');
   myReadStream.pipe(res);
 });
 
 app.get('/genre', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/genre.html', 'utf8');
+  var myReadStream = fs.createReadStream(__dirname + '/html/genre.html', 'utf8');
   myReadStream.pipe(res);
 });
 
 app.get('/year', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/year.html', 'utf8');
+  var myReadStream = fs.createReadStream(__dirname + '/html/year.html', 'utf8');
   myReadStream.pipe(res);
 });
 
 app.get('/lyrics', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/lyrics.html', 'utf8');
+  var myReadStream = fs.createReadStream(__dirname + '/html/lyrics.html', 'utf8');
   myReadStream.pipe(res);
 });
 
