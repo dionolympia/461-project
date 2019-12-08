@@ -23,11 +23,7 @@ app.use(bodyparser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 
 // Routing files
-<<<<<<< HEAD
-const{homepage, titlepage} = require('./routes/index.js');
-=======
 const{homepage, titlepage, lyricspage, artistpage, genrepage, yearpage} = require('./routes/index.js');
->>>>>>> 795ab25bb363434d837c516a1ec47915670cc677
 
 // Setup for MySQL connection
 const db = mysql.createConnection({
@@ -96,18 +92,17 @@ app.get('/year', (req, res) => {
   myReadStream.pipe(res);
 });
 
-app.get('/lyrics', (req, res) => {
-  console.log('request was made: ' + req.url);
-  db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE title LIKE ?', ["%"+req.params.title+"%"], (err, results) => {
-      if (!err)
-          res.render('title', {titles:results});
-      else
-          console.log(err);
-  });
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/html/lyrics.html', 'utf8');
-  myReadStream.pipe(res);
+app.get('/lyrics/search/:lyrics', (req, res) => {
+    console.log(req.params.lyrics);
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ?', ["%"+req.params.lyrics+"%"], (err, results) => {
+        if (!err)
+            res.render('lyrics', {lyrics:results});
+        else
+            console.log(err);
+    });
 });
+
+app.get('/lyricspage', lyricspage);
 
 
 // Stopped at 12:42 - www.youtube.com/watch?v=4fWWn2Pe2Mk
