@@ -12,7 +12,11 @@ var path= require('path');
 // File stream module
 var fs = require('fs');
 
+// Use the images folder
 app.use(express.static(__dirname + '/images'));
+
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
 
 // Setup for MySQL connection
 var mysqlConnection = mysql.createConnection({
@@ -34,19 +38,12 @@ mysqlConnection.connect((err) => {
 
 app.listen(3000, () => console.log('Express server is running at port number: 3000'));
 
-// Get the first 10 rows of the people table
-app.get('/songs', (req, res) => {
-    mysqlConnection.query('SELECT * FROM song_data LIMIT 10', (err, rows, fields) => {
+
+app.get('/title/:title', (req, res) => {
+
+    mysqlConnection.query('SELECT title FROM song_data WHERE title = ?', [req.params.title], (err, rows, fields) => {
         if (!err)
-            res.send(rows);
-        else
-            console.log(err);
-    })
-});
-app.get('/songs/:id', (req, res) => {
-    mysqlConnection.query('SELECT * FROM song_data WHERE id = ?', [req.params.id], (err, rows, fields) => {
-        if (!err)
-            res.send("<html><body><h1>Hello, World!</h1></body></html>");
+            res.render('title', {title:req.params.title})
         else
             console.log(err);
     })
