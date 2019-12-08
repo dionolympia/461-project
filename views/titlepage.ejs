@@ -12,7 +12,7 @@
   <script type="text/javascript">
     function yourFunction(){
       var search = document.getElementsByName("keywords")[0].value;
-      search = search.replace(/\s+/g, '-');
+      search = search.replace(/\s+/g, '-').toLowerCase();
       var action_src = "http://localhost:3000/title/search/" + search;
       var title_search= document.getElementById('title_search');
       your_form.action = action_src ;
@@ -38,36 +38,7 @@
     </form>
   </div>
 
-  <div class="mb-5 text-center">
-    <h1>Results:</h1>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">id</th>
-          <th scope="col">title</th>
-          <th scope="col">year</th>
-          <th scope="col">artist</th>
-          <th scope="col">genre</th>
-          <th scope="col">lyrics</th>
-      </thead>
-      <tbody>
-      <% titles.forEach(function(song) { %>
-        <tr>
-          <td><%= song.id %></td>
-          <td><%= song.title %></td>
-          <td><%= song.year %></td>
-          <td><%= song.artist %></td>
-          <td><%= song.genre %></td>
-          <td><%= song.lyrics %></td>
-        </tr>
-      <% }) %>
-      </tbody>
-    </table>
-  </div>
-
-
-  <footer class="bg-dark mt-5 footer" style="height:10em;">
+  <footer class="bg-dark mt-5 fixed-bottom" style="height:10em;">
     <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
     <br />
     <div class="text-center">

@@ -47,24 +47,25 @@ db.connect((err) => {
 
 app.listen(port, () => console.log(`Express server is running at port number: ${port}`));
 
-
-app.get('/title/:title', (req, res) => {
-
-    db.query('SELECT title FROM song_data WHERE title = ?', [req.params.title], (err, rows, fields) => {
-        if (!err)
-            res.render('title', {title:req.params.title})
-        else
-            console.log(err);
-    })
-});
-
 // Routes to homepage
 app.get('/homepage', homepage);
 app.get('', homepage);
 app.get('/home', homepage);
 
 // Routes to other pages
-app.get('/title', titlepage);
+app.get('/title/search/:title', (req, res) => {
+    console.log(req.params.title);
+
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE title LIKE ?', ["%"+req.params.title+"%"], (err, results) => {
+        if (!err)
+            res.render('title', {titles:results});
+        else
+            console.log(err);
+    });
+});
+
+app.get('/titlepage', titlepage);
+
 
 app.get('/artist', (req, res) => {
   console.log('request was made: ' + req.url);
