@@ -1,103 +1,128 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-  <h2>Artist</h2>
-  <p>Type artist name or select letter:</p>
-  <form>
-    <div class="form-group">
-      <label for="usr">Search:</label>
-      <input type="text" class="form-control" id="usr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Artists</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <style media="screen">
+    #stick-footer {
+      flex-shrink: none;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+  <div class="text-center mt-5 mb-5 container">
+    <div>
+      <img class="p-4" src="artist.png" alt="title" width="150" height="150" />
     </div>
-  </form>
-  <ul class="list-group">
-    <a href="/artistA" title="artistA">
-      <li class="list-group-item">A</li>
-    </a>
-    <a href="/artistB" title="artistB">
-      <li class="list-group-item">B</li>
-    </a>
-    <a href="/artistC" title="artistC">
-      <li class="list-group-item">C</li>
-    </a>
-    <a href="/artistD" title="artistD">
-      <li class="list-group-item">D</li>
-    </a>
-    <a href="/artistE" title="artistE">
-      <li class="list-group-item">E</li>
-    </a>
-    <a href="/artistF" title="artistF">
-      <li class="list-group-item">F</li>
-    </a>
-    <a href="/artistG" title="artistG">
-      <li class="list-group-item">G</li>
-    </a>
-    <a href="/artistH" title="artistH">
-      <li class="list-group-item">H</li>
-    </a>
-    <a href="/artistI" title="artistI">
-      <li class="list-group-item">I</li>
-    </a>
-    <a href="/artistJ" title="artistJ">
-      <li class="list-group-item">J</li>
-    </a>
-    <a href="/artistK" title="artistK">
-      <li class="list-group-item">K</li>
-    </a>
-    <a href="/artistL" title="artistL">
-      <li class="list-group-item">L</li>
-    </a>
-    <a href="/artistM" title="artistM">
-      <li class="list-group-item">M</li>
-    </a>
-    <a href="/artistN" title="artistN">
-      <li class="list-group-item">N</li>
-    </a>
-    <a href="/artistO" title="artistO">
-      <li class="list-group-item">O</li>
-    </a>
-    <a href="/artistP" title="artistP">
-      <li class="list-group-item">P</li>
-    </a>
-    <a href="/artistQ" title="artistQ">
-      <li class="list-group-item">Q</li>
-    </a>
-    <a href="/artistR" title="artistR">
-      <li class="list-group-item">R</li>
-    </a>
-    <a href="/artistS" title="artistS">
-      <li class="list-group-item">S</li>
-    </a>
-    <a href="/artistT" title="artistT">
-      <li class="list-group-item">T</li>
-    </a>
-    <a href="/artistU" title="artistU">
-      <li class="list-group-item">U</li>
-    </a>
-    <a href="/artistV" title="artistV">
-      <li class="list-group-item">V</li>
-    </a>
-    <a href="/artistW" title="artistW">
-      <li class="list-group-item">W</li>
-    </a>
-    <a href="/artistX" title="artistX">
-      <li class="list-group-item">X</li>
-    </a>
-    <a href="/artistY" title="artistY">
-      <li class="list-group-item">Y</li>
-    </a>
-    <a href="/artistZ" title="artistZ">
-      <li class="list-group-item">Z</li>
-    </a>
-  </ul>
-</div>
-  </body>
+
+    <h1 class="display-3">Artists</h1>
+    <p>Type artist name or select letter:</p>
+    <form>
+      <div class="form-group ml-5 mr-5">
+        <label for="usr">Search:</label>
+        <input type="text" class="form-control" id="usr">
+        <button type="submit" class="btn btn-secondary mt-1">Submit</button>
+      </div>
+    </form>
+
+    <p>Or pick alphabetically:</p>
+    <ul class="list-group">
+      <a href="" title="artistA">
+        <li class="list-group-item">A</li>
+      </a>
+      <a href="" title="artistB">
+        <li class="list-group-item">B</li>
+      </a>
+      <a href="" title="artistC">
+        <li class="list-group-item">C</li>
+      </a>
+      <a href="" title="artistD">
+        <li class="list-group-item">D</li>
+      </a>
+      <a href="" title="artistE">
+        <li class="list-group-item">E</li>
+      </a>
+      <a href="" title="artistF">
+        <li class="list-group-item">F</li>
+      </a>
+      <a href="" title="artistG">
+        <li class="list-group-item">G</li>
+      </a>
+      <a href="" title="artistH">
+        <li class="list-group-item">H</li>
+      </a>
+      <a href="" title="artistI">
+        <li class="list-group-item">I</li>
+      </a>
+      <a href="" title="artistJ">
+        <li class="list-group-item">J</li>
+      </a>
+      <a href="" title="artistK">
+        <li class="list-group-item">K</li>
+      </a>
+      <a href="" title="artistL">
+        <li class="list-group-item">L</li>
+      </a>
+      <a href="" title="artistM">
+        <li class="list-group-item">M</li>
+      </a>
+      <a href="" title="artistN">
+        <li class="list-group-item">N</li>
+      </a>
+      <a href="" title="artistO">
+        <li class="list-group-item">O</li>
+      </a>
+      <a href="" title="artistP">
+        <li class="list-group-item">P</li>
+      </a>
+      <a href="" title="artistQ">
+        <li class="list-group-item">Q</li>
+      </a>
+      <a href="" title="artistR">
+        <li class="list-group-item">R</li>
+      </a>
+      <a href="" title="artistS">
+        <li class="list-group-item">S</li>
+      </a>
+      <a href="" title="artistT">
+        <li class="list-group-item">T</li>
+      </a>
+      <a href="" title="artistU">
+        <li class="list-group-item">U</li>
+      </a>
+      <a href="" title="artistV">
+        <li class="list-group-item">V</li>
+      </a>
+      <a href="" title="artistW">
+        <li class="list-group-item">W</li>
+      </a>
+      <a href="" title="artistX">
+        <li class="list-group-item">X</li>
+      </a>
+      <a href="" title="artistY">
+        <li class="list-group-item">Y</li>
+      </a>
+      <a href="" title="artistZ">
+        <li class="list-group-item">Z</li>
+      </a>
+    </ul>
+  </div>
+
+  <footer class="bg-dark mt-5" id="sticky-footer" style="height:10em;">
+    <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
+    <br />
+    <div class="text-center">
+      <a class="text-white" href="/home">Go back to homepage</a>
+    </div>
+  </footer>
+
+</body>
+
 </html>

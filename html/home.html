@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>SongSearch</title>
   <meta charset="utf-8">
@@ -9,107 +10,111 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script type="text/javascript">
-    jQuery(document).ready(function(){
-      for(var i=0;i<10;i++) {
+    jQuery(document).ready(function() {
+      for (var i = 0; i < 10; i++) {
         var x = $('li')[i];
-        $(x).css('-webkit-animation','music 1.5s '+i+'00ms  ease-in-out both infinite');
+        $(x).css('-webkit-animation', 'music 1.5s ' + i + '00ms  ease-in-out both infinite');
       }
       $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
   <style>
-    #notes{
-        display: inline-block;
-        color: #000;
-        text-shadow: 0 -1px 0 grey, 0 1px 0 grey;
+    #notes {
+      display: inline-block;
+      color: #000;
+      text-shadow: 0 -1px 0 grey, 0 1px 0 grey;
     }
 
     .anim {
-        -webkit-animation: music 3s ease-in-out both infinite;
+      -webkit-animation: music 3s ease-in-out both infinite;
     }
 
     @-webkit-keyframes music {
-        0%,100% {
-            -webkit-transform: translate3d(0,-10px,0);
-        }
-        50% {
-            -webkit-transform: translate3d(0,10px,0);
-        }
+
+      0%,
+      100% {
+        -webkit-transform: translate3d(0, -10px, 0);
+      }
+
+      50% {
+        -webkit-transform: translate3d(0, 10px, 0);
+      }
     }
-    .page-button:hover{
+
+    .page-button:hover {
       background-color: black;
       opacity: .25;
     }
-
   </style>
 </head>
 
 <body>
 
-<!-- -->
+  <!-- -->
 
   <div>
-      <ul class="text-center">
-        <li id="notes" style="font-size:1.5em">&#9833;</li>
-        <li id="notes" style="font-size:2.75em">&#9833;</li>
-        <li id="notes" style="font-size:4em">&#9834;</li>
-        <li id="notes" style="font-size:4.5em">&#9836;</li>
-        <li id="notes" style="font-size:4em">&#9834;</li>
-        <li id="notes" style="font-size:2.75em">&#9833;</li>
-        <li id="notes" style="font-size:1.5em">&#9833;</li>
-      </ul>
+    <ul class="text-center">
+      <li id="notes" style="font-size:1.5em">&#9833;</li>
+      <li id="notes" style="font-size:2.75em">&#9833;</li>
+      <li id="notes" style="font-size:4em">&#9834;</li>
+      <li id="notes" style="font-size:4.5em">&#9836;</li>
+      <li id="notes" style="font-size:4em">&#9834;</li>
+      <li id="notes" style="font-size:2.75em">&#9833;</li>
+      <li id="notes" style="font-size:1.5em">&#9833;</li>
+    </ul>
   </div>
 
 
-<div class="container">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-12">
         <h1 class="text-center display-1">SongSearch.<strong>js</strong></h1>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="row">
+      <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
+        <a href="/title" title="title">
+          <img src="title.png" alt="title" width="150" height="150" />
+        </a>
+      </div>
+      <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
+        <a href="/artist" title="artist">
+          <img src="artist.png" alt="artist" width="150" height="150" />
+        </a>
+      </div>
+      <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
+        <a href="/genre" title="genre">
+          <img src="genre.ico" alt="genre" width="150" height="150" />
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2 text-center"></div>
+      <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
+        <a href="/year" title="year">
+          <img src="year.png" alt="year" width="150" height="150" />
+        </a>
+      </div>
+      <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
+        <a href="/lyrics" title="lyrics">
+          <img src="lyrics.png" alt="lyrics" width="150" height="150" />
+        </a>
+      </div>
+      <div class="col-lg-2 text-center"></div>
     </div>
   </div>
 
-  <br/>
-  <br/>
-  <br/>
-
-  <div class="row">
-    <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button" >
-      <a href="/title" title="title">
-        <img src="title.png" alt="title" width="150" height="150"/>
-      </a>
-    </div>
-    <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
-      <a href="/artist" title="artist">
-        <img src="artist.png" alt="artist" width="150" height="150"/>
-      </a>
-    </div>
-    <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button" >
-      <a href="/genre" title="genre">
-        <img src="genre.ico" alt="genre" width="150" height="150"/>
-      </a>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-2 text-center"></div>
-    <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
-      <a href="/year" title="year">
-        <img src="year.png" alt="year" width="150" height="150"/>
-      </a>
-    </div>
-    <div class="col-lg-4 text-center bg-light rounded-pill p-5 mb-1 page-button">
-      <a href="/lyrics" title="lyrics">
-        <img src="lyrics.png" alt="lyrics" width="150" height="150"/>
-      </a>
-    </div>
-    <div class="col-lg-2 text-center"></div>
-  </div>
-</div>
-
-<div class="bg-dark mt-5" style="height:10em;">
-  <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
-</div>
+  <footer class="bg-dark mt-5" style="height:10em;">
+    <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
+  </footer>
 
 </body>
+
 </html>
