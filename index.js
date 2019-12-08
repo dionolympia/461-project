@@ -16,9 +16,9 @@ app.use(express.static(__dirname + '/images'));
 
 // Setup for MySQL connection
 var mysqlConnection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
+    host: 'cmsc461project.crie639zueql.us-east-1.rds.amazonaws.com',
+    user: 'admin',
+    password: 'password',
     database: 'cmsc461project'
 });
 
@@ -36,12 +36,9 @@ app.listen(3000, () => console.log('Express server is running at port number: 30
 
 // Get the first 10 rows of the people table
 app.get('/songs', (req, res) => {
-    mysqlConnection.query('SELECT title FROM song_data LIMIT 1', (err, rows, fields) => {
+    mysqlConnection.query('SELECT * FROM song_data LIMIT 10', (err, rows, fields) => {
         if (!err)
-            //res.send(rows);
-            rows.forEach(function(result){
-              res.send(result.title);
-            });
+            res.send(rows);
         else
             console.log(err);
     })
@@ -50,9 +47,12 @@ app.get('/songs/:id', (req, res) => {
     mysqlConnection.query('SELECT * FROM song_data WHERE id = ?', [req.params.id], (err, rows, fields) => {
         if (!err)
             //res.send(rows);
+            /*
             rows.forEach(function(result){
               res.send(result);
             });
+            */
+            res.send("<html><body><h1>Hello, World!</h1></body></html>");
         else
             console.log(err);
     })
