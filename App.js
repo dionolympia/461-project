@@ -12,36 +12,45 @@ var path= require('path');
 // File stream module
 var fs = require('fs');
 
-// Use the images folder
-app.use(express.static(__dirname + '/images'));
+var port = 3000;
 
-// Set the view engine to EJS
-app.set('view engine', 'ejs');
+// Configure Middleware
+app.set('port', process.env.port || port); // set express to use this port
+app.set('views', __dirname + '/views'); // set express to look in this folder to render our view
+app.set('view engine', 'ejs'); // configure template engine
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json()); // parse form data client
+app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
+
+// Routing files
+const{homepage, titlepage} = require('./routes/index.js');
 
 // Setup for MySQL connection
-var mysqlConnection = mysql.createConnection({
+const db = mysql.createConnection({
     host: 'cmsc461project.crie639zueql.us-east-1.rds.amazonaws.com',
     user: 'admin',
     password: 'password',
     database: 'cmsc461project'
 });
 
+global.db = db;
+
 console.log(__dirname);
 
 // Establishing (and testing) MySQL connection
-mysqlConnection.connect((err) => {
+db.connect((err) => {
     if (!err)
         console.log('DB connection success');
     else
         console.log('DB connection failure: ' + JSON.stringify(err, undefined, 2));
 });
 
-app.listen(3000, () => console.log('Express server is running at port number: 3000'));
+app.listen(port, () => console.log(`Express server is running at port number: ${port}`));
 
 
 app.get('/title/:title', (req, res) => {
 
-    mysqlConnection.query('SELECT title FROM song_data WHERE title = ?', [req.params.title], (err, rows, fields) => {
+    db.query('SELECT title FROM song_data WHERE title = ?', [req.params.title], (err, rows, fields) => {
         if (!err)
             res.render('title', {title:req.params.title})
         else
@@ -49,26 +58,13 @@ app.get('/title/:title', (req, res) => {
     })
 });
 
-app.get('', (req, res) => {
-  console.log('request was made: ' + req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/html/home.html', 'utf8');
-  myReadStream.pipe(res);
-});
+// Routes to homepage
+app.get('/homepage', homepage);
+app.get('', homepage);
+app.get('/home', homepage);
 
-app.get('/home', (req, res) => {
-  console.log('request was made: ' + req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/html/home.html', 'utf8');
-  myReadStream.pipe(res);
-});
-
-app.get('/title', (req, res) => {
-  console.log('request was made: ' + req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/html/title.html', 'utf8');
-  myReadStream.pipe(res);
-});
+// Routes to other pages
+app.get('/title', titlepage);
 
 app.get('/artist', (req, res) => {
   console.log('request was made: ' + req.url);

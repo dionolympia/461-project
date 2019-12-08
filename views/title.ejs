@@ -12,11 +12,10 @@
 </head>
 
 <body class="bg-light">
-
   <div class="text-center container mt-5">
 
     <div>
-      <img class="p-4" src="/title.png" alt="title" width="150" height="150" />
+      <img class="p-4" src="/images/title.png" alt="title" width="150" height="150" />
     </div>
 
     <h1 class="display-3">Titles</h1>
@@ -32,13 +31,13 @@
     </form>
   </div>
 
-  <div class="mb-5 mt-5 text-center">
+  <div class="mb-5 text-center">
     <h1>Results:</h1>
-    <p><%= title %></p>
+    <p><%- JSON.stringify(titles)%></p>
   </div>
 
 
-  <footer class="bg-dark mt-5 footer fixed-bottom" style="height:10em;">
+  <footer class="bg-dark mt-5 footer" style="height:10em;">
     <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
     <br />
     <div class="text-center">
