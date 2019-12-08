@@ -23,7 +23,7 @@ app.use(bodyparser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 
 // Routing files
-const{homepage, titlepage, lyricspage} = require('./routes/index.js');
+const{homepage, titlepage, lyricspage, artistpage, genrepage, yearpage} = require('./routes/index.js');
 
 // Setup for MySQL connection
 const db = mysql.createConnection({
@@ -77,12 +77,15 @@ app.get('/lyrics/search/:lyrics', (req, res) => {
 app.get('/lyricspage', lyricspage);
 
 // ARTIST PAGES
-app.get('/artist', (req, res) => {
-  console.log('request was made: ' + req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/html/artist.html', 'utf8');
-  myReadStream.pipe(res);
+app.get('/artist/search/:artist', (req, res) => {
+    db.query('SELECT artist as `artist` FROM song_data WHERE artist LIKE ?', ["%"+req.params.artist+"%"], (err, results) => {
+        if (!err)
+            res.render('artist', {artist:results});
+        else
+            console.log(err);
+    });
 });
+app.get('/artistpage', artistpage);
 
 // GENRE PAGES
 app.get('/genre', (req, res) => {
