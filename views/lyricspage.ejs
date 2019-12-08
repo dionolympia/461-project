@@ -12,7 +12,7 @@
   <script type="text/javascript">
     function yourFunction(){
       var search = document.getElementsByName("keywords")[0].value;
-      search = search.replace(/\s+/g, '-').toLowerCase();
+      search = search.replace(/\s+/g, '-');
       var action_src = "http://localhost:3000/lyrics/search/" + search;
       var lyrics_search= document.getElementById('lyrics_search');
       your_form.action = action_src ;
@@ -21,7 +21,6 @@
 </head>
 
 <body class="bg-light">
-  <p>edlskfm</p>
   <div class="text-center container mt-5">
 
     <div>

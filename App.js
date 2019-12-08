@@ -23,7 +23,7 @@ app.use(bodyparser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 
 // Routing files
-const{homepage, titlepage} = require('./routes/index.js');
+const{homepage, titlepage, lyricspage} = require('./routes/index.js');
 
 // Setup for MySQL connection
 const db = mysql.createConnection({
@@ -53,9 +53,9 @@ app.get('', homepage);
 app.get('/home', homepage);
 
 // Routes to other pages
-app.get('/title/search/:title', (req, res) => {
-    console.log(req.params.title);
 
+// TITLE PAGES
+app.get('/title/search/:title', (req, res) => {
     db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE title LIKE ?', ["%"+req.params.title+"%"], (err, results) => {
         if (!err)
             res.render('title', {titles:results});
@@ -63,10 +63,20 @@ app.get('/title/search/:title', (req, res) => {
             console.log(err);
     });
 });
-
 app.get('/titlepage', titlepage);
 
+// LYRICS PAGES
+app.get('/lyrics/search/:lyrics', (req, res) => {
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ?', ["%"+req.params.lyrics+"%"], (err, results) => {
+        if (!err)
+            res.render('lyrics', {lyrics:results});
+        else
+            console.log(err);
+    });
+});
+app.get('/lyricspage', lyricspage);
 
+// ARTIST PAGES
 app.get('/artist', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
@@ -74,6 +84,7 @@ app.get('/artist', (req, res) => {
   myReadStream.pipe(res);
 });
 
+// GENRE PAGES
 app.get('/genre', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
@@ -81,6 +92,7 @@ app.get('/genre', (req, res) => {
   myReadStream.pipe(res);
 });
 
+// YEAR PAGES
 app.get('/year', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
@@ -88,6 +100,7 @@ app.get('/year', (req, res) => {
   myReadStream.pipe(res);
 });
 
+// LYRICS PAGES
 app.get('/lyrics', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});

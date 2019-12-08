@@ -12,7 +12,7 @@
   <script type="text/javascript">
     function yourFunction(){
       var search = document.getElementsByName("keywords")[0].value;
-      search = search.replace(/\s+/g, '-').toLowerCase();
+      search = search.replace(/\s+/g, '-');
       var action_src = "http://localhost:3000/title/search/" + search;
       var title_search= document.getElementById('title_search');
       your_form.action = action_src ;
