@@ -8,4 +8,7 @@ module.exports = {
   lyricspage: (req,res) => {
         res.render('lyricspage.ejs');
   },
+  genrepage: (req,res) => {
+        res.render('genrepage.ejs');
+  },
 };
