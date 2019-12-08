@@ -8,7 +8,13 @@ module.exports = {
   lyricspage: (req,res) => {
         res.render('lyricspage.ejs');
   },
+  artistpage: (req,res) => {
+        res.render('artistpage.ejs');
+  },
   genrepage: (req,res) => {
         res.render('genrepage.ejs');
+  },
+  yearpage: (req,res) => {
+        res.render('yearpage.ejs');
   },
 };
