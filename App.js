@@ -52,7 +52,7 @@ app.get('/homepage', homepage);
 app.get('', homepage);
 app.get('/home', homepage);
 
-// Routes to other pages
+// TITLE PAGES
 app.get('/title/search/:title', (req, res) => {
     console.log(req.params.title);
 
@@ -63,9 +63,7 @@ app.get('/title/search/:title', (req, res) => {
             console.log(err);
     });
 });
-
 app.get('/titlepage', titlepage);
-
 
 // ARTIST PAGES
 app.get('/artist/search/:artist', (req, res) => {
@@ -78,13 +76,18 @@ app.get('/artist/search/:artist', (req, res) => {
 });
 app.get('/artistpage', artistpage);
 
-app.get('/genre', (req, res) => {
-  console.log('request was made: ' + req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/html/genre.html', 'utf8');
-  myReadStream.pipe(res);
+// GENRE PAGES
+app.get('/genre/:genre', (req, res) => {
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE genre = ? LIMIT 10 OFFSET 10', [req.params.genre], (err, results) => {
+        if (!err)
+            res.render('genre', {genres :results});
+        else
+            console.log(err);
+    });
 });
+app.get('/genrepage', genrepage);
 
+// YEAR PAGES
 app.get('/year', (req, res) => {
   console.log('request was made: ' + req.url);
   res.writeHead(200, {'Content-Type': 'text/html'});
@@ -92,6 +95,7 @@ app.get('/year', (req, res) => {
   myReadStream.pipe(res);
 });
 
+// LYRICS PAGES
 app.get('/lyrics/search/:lyrics', (req, res) => {
     console.log(req.params.lyrics);
     db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ?', ["%"+req.params.lyrics+"%"], (err, results) => {
@@ -103,6 +107,3 @@ app.get('/lyrics/search/:lyrics', (req, res) => {
 });
 
 app.get('/lyricspage', lyricspage);
-
-
-// Stopped at 12:42 - www.youtube.com/watch?v=4fWWn2Pe2Mk
