@@ -46,16 +46,17 @@ app.get('/songs', (req, res) => {
 app.get('/songs/:id', (req, res) => {
     mysqlConnection.query('SELECT * FROM song_data WHERE id = ?', [req.params.id], (err, rows, fields) => {
         if (!err)
-            //res.send(rows);
-            /*
-            rows.forEach(function(result){
-              res.send(result);
-            });
-            */
             res.send("<html><body><h1>Hello, World!</h1></body></html>");
         else
             console.log(err);
     })
+});
+
+app.get('', (req, res) => {
+  console.log('request was made: ' + req.url);
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/html/home.html', 'utf8');
+  myReadStream.pipe(res);
 });
 
 app.get('/home', (req, res) => {
