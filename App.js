@@ -124,8 +124,6 @@ app.get('/genre/:genre/:page', (req, res) => {
               console.log(err);
       });
     }
-
-
 });
 app.get('/genrepage', genrepage);
 

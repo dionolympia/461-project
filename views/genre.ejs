@@ -82,11 +82,30 @@
     <br />
     <br />
 
-    <div class="">
-      <button class=" btn btn-secondary float-left p-3 ml-5" type="button" name="button">Previous page</button>
-      <button class="btn btn-secondary float-right p-3 mr-5" type="button" name="button">Next page</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          <a href="/artist/letter/A">
+            <a href="http://localhost:3000/genre/<%= genrename %>/<%=parseInt(pagenumber,10) - 1%>">
+              <li class="list-group-item">Previous page</li>
+            </a>
+          </a>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+          <a href="http://localhost:3000/genre/<%= genrename %>/<%=parseInt(pagenumber,10) + 1%>">
+            <li class="list-group-item">Next page</li>
+          </a>
+        </div>
+      </div>
     </div>
-
   </div>
 
   <br />
