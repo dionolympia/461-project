@@ -18,6 +18,6 @@ module.exports = {
         res.render('yearpage.ejs');
   },
   filterpage: (req,res) => {
-        res.render('filter.ejs');
+        res.render('filterpage.ejs');
   },
 };

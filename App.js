@@ -130,3 +130,5 @@ app.get('/lyrics/search/:lyric', (req, res) => {
 });
 
 app.get('/lyricspage', lyricspage);
+
+app.get('/filterpage', filterpage);
