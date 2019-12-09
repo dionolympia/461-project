@@ -8,13 +8,20 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
+  <script type="text/javascript">
+    function yourFunction(){
+      var search = document.getElementsByName("year_value")[0].value;
+      search = search.replace(/\s+/g, '-');
+      var action_src = "http://localhost:3000/year/search/" + search;
+      var lyrics_search= document.getElementById('lyrics_search');
+      your_form.action = action_src ;
+    }
+  </script>
 </head>
 
 <body>
@@ -25,19 +32,17 @@
         <img class="p-4" src="/images/year.png" alt="title" width="150" height="150" />
       </div>
       <h1 class="display-3">Years</h1>
-      <div class="container text-center">
-        <input class="date-own form-control" type="text">
 
-
+      <form method="GET" id = "your_form" onsubmit="yourFunction()">
+        <input class="date-own form-control" type="text" name="year_value">
         <script type="text/javascript">
           $('.date-own').datepicker({
             minViewMode: 2,
             format: 'yyyy'
           });
         </script>
-
-
-      </div>
+        <button class="btn-secondary" type="submit" value"submit-year">Submit</button>
+      </form>
 
     </div>
     <footer class="bg-dark mt-5 fixed-bottom" style="height:10em;">

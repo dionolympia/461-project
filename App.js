@@ -23,7 +23,7 @@ app.use(bodyparser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 
 // Routing files
-const{homepage, titlepage, lyricspage, artistpage, genrepage, yearpage} = require('./routes/index.js');
+const{homepage, titlepage, lyricspage, artistpage, genrepage, yearpage, filterpage} = require('./routes/index.js');
 
 // Setup for MySQL connection
 const db = mysql.createConnection({
@@ -96,12 +96,27 @@ app.get('/genre/:genre', (req, res) => {
 app.get('/genrepage', genrepage);
 
 // YEAR PAGES
-app.get('/year', (req, res) => {
-  console.log('request was made: ' + req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/html/year.html', 'utf8');
-  myReadStream.pipe(res);
+app.get('/year/search/:year', (req, res) => {
+  if(!req.params.year){
+
+    // If year is blank, redirect to same page
+    res.redirect('/');
+
+  }
+  else{
+
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE year = ? LIMIT 10', [req.params.year], (err, results) => {
+        if (!err)
+            res.render('year', {years :results});
+        else
+            console.log(err);
+    });
+
+  }
+
+
 });
+app.get('/yearpage', yearpage);
 
 // LYRICS PAGES
 app.get('/lyrics/search/:lyrics', (req, res) => {
