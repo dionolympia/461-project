@@ -128,15 +128,19 @@ app.get('/genre/:genre/:page', (req, res) => {
 app.get('/genrepage', genrepage);
 
 // YEAR PAGES
-app.get('/year/search/:year', (req, res) => {
-  if(!req.params.year){
-    // If year is blank, redirect to same page
-    res.redirect('/');
+app.get('/year/search/:year/:page', (req, res) => {
+  if(req.params.page < 0){
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE year = ? LIMIT 10 OFFSET ?', [req.params.year, parseInt(req.params.page, 10) * 10], (err, results) => {
+        if (!err)
+            res.render('year', {years :results, pagenumber: req.params.page, curryear: req.params.year});
+        else
+            console.log(err);
+    });
   }
   else{
-    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE year = ? LIMIT 10', [req.params.year], (err, results) => {
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE year = ? LIMIT 10 OFFSET ?', [req.params.year, parseInt(req.params.page, 10) * 10], (err, results) => {
         if (!err)
-            res.render('year', {years :results});
+            res.render('year', {years :results, pagenumber: req.params.page, curryear: req.params.year});
         else
             console.log(err);
     });

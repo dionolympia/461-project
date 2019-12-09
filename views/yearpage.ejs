@@ -17,7 +17,7 @@
     function yourFunction() {
       var search = document.getElementsByName("year_value")[0].value;
       search = search.replace(/\s+/g, '-');
-      var action_src = "http://localhost:3000/year/search/" + search;
+      var action_src = "http://localhost:3000/year/search/" + search + '/0';
       var lyrics_search = document.getElementById('lyrics_search');
       your_form.action = action_src;
     }
