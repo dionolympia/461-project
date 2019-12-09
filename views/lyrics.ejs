@@ -12,7 +12,7 @@
   <script type="text/javascript">
     function yourFunction() {
       var search = document.getElementsByName("keywords")[0].value;
-      var action_src = "http://localhost:3000/lyrics/search/" + search;
+      var action_src = "http://localhost:3000/lyrics/search/" + search + '/0';
       your_form.action = action_src;
     }
   </script>
@@ -38,6 +38,37 @@
 
   <div class="mb-5 text-center">
     <h1>Results:</h1>
+
+    <br />
+    <br />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          <a href="/artist/letter/A">
+            <a href="http://localhost:3000/lyrics/search/<%= currlyric %>/<%=parseInt(pagenumber,10) - 1%>">
+              <li class="list-group-item">Previous page</li>
+            </a>
+          </a>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+          <a href="http://localhost:3000/lyrics/search/<%= currlyric %>/<%=parseInt(pagenumber,10) + 1%>">
+            <li class="list-group-item">Next page</li>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <br />
 
     <table class="table">
       <thead>

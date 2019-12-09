@@ -12,7 +12,7 @@
   <script type="text/javascript">
     function yourFunction() {
       var search = document.getElementsByName("keywords")[0].value;
-      var action_src = "http://localhost:3000/lyrics/search/" + search;
+      var action_src = "http://localhost:3000/lyrics/search/" + search + "/0";
       var lyrics_search = document.getElementById('lyrics_search');
       your_form.action = action_src;
     }

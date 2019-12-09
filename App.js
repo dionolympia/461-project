@@ -130,7 +130,7 @@ app.get('/genrepage', genrepage);
 // YEAR PAGES
 app.get('/year/search/:year/:page', (req, res) => {
   if(req.params.page < 0){
-    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE year = ? LIMIT 10 OFFSET ?', [req.params.year, parseInt(req.params.page, 10) * 10], (err, results) => {
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE year = ? LIMIT 10 OFFSET ?', [req.params.year, (parseInt(req.params.page, 10)+1) * 10], (err, results) => {
         if (!err)
             res.render('year', {years :results, pagenumber: req.params.page, curryear: req.params.year});
         else
@@ -149,13 +149,22 @@ app.get('/year/search/:year/:page', (req, res) => {
 app.get('/yearpage', yearpage);
 
 // LYRICS PAGES
-app.get('/lyrics/search/:lyric', (req, res) => {
-    console.log(req.params.lyric);
-    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ? LIMIT 10', ["%"+req.params.lyric+"%"], (err, results) => {
-        if (!err)
-            res.render('lyrics', {lyrics:results});
-        else
-            console.log(err);
-    });
+app.get('/lyrics/search/:lyric/:page', (req, res) => {
+    if(req.params.page < 0){
+      db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ? LIMIT 10 OFFSET ?', ["%"+req.params.lyric+"%", (parseInt(req.params.page, 10) + 1) * 10], (err, results) => {
+          if (!err)
+              res.render('lyrics', {lyrics:results, pagenumber: req.params.page, currlyric: req.params.lyric});
+          else
+              console.log(err);
+      });
+    }
+    else{
+      db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ? LIMIT 10 OFFSET ?', ["%"+req.params.lyric+"%", parseInt(req.params.page, 10) * 10], (err, results) => {
+          if (!err)
+              res.render('lyrics', {lyrics:results, pagenumber: req.params.page, currlyric: req.params.lyric});
+          else
+              console.log(err);
+      });
+    }
 });
 app.get('/lyricspage', lyricspage);
