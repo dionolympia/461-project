@@ -10,10 +10,20 @@
 </head>
 <body>
 
-<div class="container">
-  <h2>Filtered Search</h2>
+  <div class="text-center container mt-5">
+
+    <div>
+      <img class="p-4" src="/images/filter.png" alt="filter" width="150" height="150" />
+    </div>
+
+    <h1 class="display-3">Filtered Search</h1>
+
+    <br />
+
+  </div>
+<div class="container text-center">
   <p>Type in search bars to narrow search:</p>
-  <form>
+  <form method="GET" id = "your_form" onsubmit="yourFunction()">
     <div class="form-group">
       <label for="usr">Title:</label>
       <input type="text" class="form-control" id="usr">
@@ -25,6 +35,8 @@
       <input type="text" class="form-control" id="usr">
       <label for="usr">Lyrics:</label>
       <input type="text" class="form-control" id="usr">
+      <input class="btn-secondary" type="submit"/>
+
     </div>
   </form>
 </div>
