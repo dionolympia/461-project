@@ -12,9 +12,7 @@
   <script type="text/javascript">
     function yourFunction(){
       var search = document.getElementsByName("keywords")[0].value;
-      search = search.replace(/\s+/g, '-');
       var action_src = "http://localhost:3000/lyrics/search/" + search;
-      var lyrics_search= document.getElementById('lyrics_search');
       your_form.action = action_src ;
     }
   </script>
@@ -32,7 +30,7 @@
     <br />
 
     <p>Search lyrics by keyword(s):</p>
-      <form method="GET" id = "your_form" onsubmit="yourFunction()">
+    <form method="GET" id = "your_form" onsubmit="yourFunction()">
       <input type="text" name="keywords">
       <input class="btn-secondary" type="submit" value="Search">
     </form>

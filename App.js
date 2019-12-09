@@ -67,7 +67,7 @@ app.get('/titlepage', titlepage);
 
 // ARTIST PAGES
 app.get('/artist/search/:artist', (req, res) => {
-    db.query('SELECT DISTINCT artist as `artist` FROM song_data WHERE artist LIKE ?', ["%"+req.params.artist+"%"], (err, results) => {
+    db.query('SELECT DISTINCT artist as `artist` FROM song_data WHERE artist LIKE ? ORDER BY artist', ["%"+req.params.artist+"%"], (err, results) => {
         if (!err)
             res.render('artist', {artists:results});
         else
@@ -119,9 +119,9 @@ app.get('/year/search/:year', (req, res) => {
 app.get('/yearpage', yearpage);
 
 // LYRICS PAGES
-app.get('/lyrics/search/:lyrics', (req, res) => {
-    console.log(req.params.lyrics);
-    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ?', ["%"+req.params.lyrics+"%"], (err, results) => {
+app.get('/lyrics/search/:lyric', (req, res) => {
+    console.log(req.params.lyric);
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE lyrics LIKE ? LIMIT 10', ["%"+req.params.lyric+"%"], (err, results) => {
         if (!err)
             res.render('lyrics', {lyrics:results});
         else
