@@ -24,7 +24,7 @@ app.use(bodyparser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 
 // Routing files
-const{homepage, titlepage, lyricspage, artistpage, genrepage, yearpage, filterpage} = require('./routes/index.js');
+const{homepage, titlepage, lyricspage, artistpage, genrepage, yearpage} = require('./routes/index.js');
 
 // Setup for MySQL connection
 const db = mysql.createConnection({
@@ -87,11 +87,19 @@ app.get('/artist/letter/:letter', (req, res) => {
 app.get('/artist/specific/:artist', (req, res) => {
     QUERY1 = "SELECT COUNT(id) as `song_count` FROM song_data WHERE artist = ?";
     QUERY2 = "SELECT genre as `top_genre`, COUNT(genre) as `genre_freq` FROM song_data WHERE artist=? GROUP BY genre ORDER BY `genre_freq` DESC LIMIT 1";
+    QUERY3 = "SELECT year as `top_year`, COUNT(year) as `year_freq` FROM song_data WHERE artist=? GROUP BY year ORDER BY `year_freq` DESC LIMIT 1";
+    QUERY4 = "SELECT year as `year`, COUNT(year) as `song_count` FROM song_data WHERE artist=? GROUP BY year;";
     db.query(QUERY1, [req.params.artist], function(err, result1) {
       db.query(QUERY2, [req.params.artist], function(err, result2) {
-        console.log(result1);
-        console.log(result2);
-        res.render('artistspecific', {artist: req.params.artist, songs : result1, genres: result2});
+        db.query(QUERY3, [req.params.artist], function(err, result3) {
+          db.query(QUERY4, [req.params.artist], function(err, result4) {
+            console.log(result1);
+            console.log(result2);
+            console.log(result3);
+            console.log(result4);
+            res.render('artistspecific', {artist: req.params.artist, songs : result1, genres: result2, years: result3, yearstats: result4});
+          });
+        });
       });
     });
 });
@@ -135,7 +143,4 @@ app.get('/lyrics/search/:lyric', (req, res) => {
             console.log(err);
     });
 });
-
 app.get('/lyricspage', lyricspage);
-
-app.get('/filterpage', filterpage);

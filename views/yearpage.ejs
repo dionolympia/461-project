@@ -14,12 +14,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
   <script type="text/javascript">
-    function yourFunction(){
+    function yourFunction() {
       var search = document.getElementsByName("year_value")[0].value;
       search = search.replace(/\s+/g, '-');
       var action_src = "http://localhost:3000/year/search/" + search;
-      var lyrics_search= document.getElementById('lyrics_search');
-      your_form.action = action_src ;
+      var lyrics_search = document.getElementById('lyrics_search');
+      your_form.action = action_src;
     }
   </script>
 </head>
@@ -33,8 +33,8 @@
       </div>
       <h1 class="display-3">Years</h1>
 
-      <form method="GET" id = "your_form" onsubmit="yourFunction()">
-        <input class="date-own form-control" type="text" name="year_value">
+      <form method="GET" id="your_form" onsubmit="yourFunction()">
+        <input class="date-own form-control" required type="text" name="year_value">
         <script type="text/javascript">
           $('.date-own').datepicker({
             minViewMode: 2,
@@ -46,7 +46,7 @@
 
     </div>
     <footer class="bg-dark mt-5 fixed-bottom" style="height:10em;">
-      <p class="text-light text-center" >Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
+      <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
       <br />
       <div class="text-center">
         <a class="text-white" href="/home">Go back to homepage</a>

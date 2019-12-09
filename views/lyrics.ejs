@@ -10,10 +10,10 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script type="text/javascript">
-    function yourFunction(){
+    function yourFunction() {
       var search = document.getElementsByName("keywords")[0].value;
       var action_src = "http://localhost:3000/lyrics/search/" + search;
-      your_form.action = action_src ;
+      your_form.action = action_src;
     }
   </script>
 </head>
@@ -30,8 +30,8 @@
     <br />
 
     <p>Search lyrics by keyword(s):</p>
-    <form method="GET" id = "your_form" onsubmit="yourFunction()">
-      <input type="text" name="keywords">
+    <form method="GET" id="your_form" onsubmit="yourFunction()">
+      <input required type="text" name="keywords">
       <input class="btn-secondary" type="submit" value="Search">
     </form>
   </div>
@@ -50,7 +50,7 @@
           <th scope="col">lyrics</th>
       </thead>
       <tbody>
-      <% lyrics.forEach(function(song) { %>
+        <% lyrics.forEach(function(song) { %>
         <tr>
           <td><%= song.id %></td>
           <td><%= song.title %></td>
@@ -59,7 +59,7 @@
           <td><%= song.genre %></td>
           <td><%= song.lyrics %></td>
         </tr>
-      <% }) %>
+        <% }) %>
       </tbody>
     </table>
   </div>

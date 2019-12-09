@@ -25,6 +25,7 @@
           <th scope="col">artist name</th>
           <th scope="col">song count</th>
           <th scope="col">top genre</th>
+          <th scope="col">year (with most songs)</th>
         </tr>
       </thead>
       <tbody>
@@ -36,8 +37,32 @@
           <% genres.forEach(function(genre) { %>
           <td><%= genre.top_genre %></td>
           <% }) %>
+          <% years.forEach(function(year) { %>
+          <td><%= year.top_year %></td>
+          <% }) %>
         </tr>
 
+      </tbody>
+    </table>
+
+    <br />
+
+    <h2 class="display-5">Year statistics</h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">year</th>
+          <th scope="col">number of songs</th>
+
+      </thead>
+      <tbody>
+        <% yearstats.forEach(function(yearstat) { %>
+        <tr>
+          <td><%= yearstat.year %></td>
+          <td><%= yearstat.song_count %></td>
+        </tr>
+        <% }) %>
       </tbody>
     </table>
 
@@ -46,7 +71,7 @@
     <p><%= genres.top_genre %></p>
   </div>
 
-  <footer class="bg-dark mt-5 fixed-bottom" style=" height:10em;">
+  <footer class="bg-dark mt-5" style=" height:10em;">
     <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
     <br />
     <div class="text-center">

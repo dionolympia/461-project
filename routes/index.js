@@ -17,7 +17,4 @@ module.exports = {
   yearpage: (req,res) => {
         res.render('yearpage.ejs');
   },
-  filterpage: (req,res) => {
-        res.render('filterpage.ejs');
-  },
 };
