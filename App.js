@@ -108,12 +108,24 @@ app.get('/artistpage', artistpage);
 // GENRE PAGES
 app.get('/genre/:genre/:page', (req, res) => {
     console.log(typeof req.params.page);
-    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE genre = ? LIMIT 10 OFFSET ?;', [req.params.genre, parseInt(req.params.page, 10) * 10], (err, results) => {
-        if (!err)
-            res.render('genre', {genres :results});
-        else
-            console.log(err);
-    });
+    if(req.params.page < 0){
+      db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE genre = ? LIMIT 10 OFFSET ?;', [req.params.genre, (parseInt(req.params.page, 10) + 1) * 10], (err, results) => {
+          if (!err)
+              res.render('genre', {genres: results, pagenumber: req.params.page, genrename: req.params.genre});
+          else
+              console.log(err);
+      });
+    }
+    else{
+      db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE genre = ? LIMIT 10 OFFSET ?;', [req.params.genre, parseInt(req.params.page, 10) * 10], (err, results) => {
+          if (!err)
+              res.render('genre', {genres: results, pagenumber: req.params.page, genrename: req.params.genre});
+          else
+              console.log(err);
+      });
+    }
+
+
 });
 app.get('/genrepage', genrepage);
 
