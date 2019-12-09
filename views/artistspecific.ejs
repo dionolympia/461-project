@@ -9,14 +9,6 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <script type="text/javascript">
-    function yourFunction() {
-      let search = document.getElementsByName("keywords")[0].value;
-      search = search.replace(/\s+/g, '-');
-      let action_src = "http://localhost:3000/artist/search/" + search;
-      your_form.action = action_src;
-    }
-  </script>
 </head>
 
 <body class="bg-light">
@@ -30,20 +22,31 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">artist</th>
+          <th scope="col">artist name</th>
+          <th scope="col">song count</th>
+          <th scope="col">top genre</th>
+        </tr>
       </thead>
       <tbody>
-        <% artists.forEach(function(song) { %>
         <tr>
-          <td><a href="http://localhost:3000/artist/specific/<%= song.artist %>" target="_parent" id="specific_artist_search" name="artist-name" onclick="return test()"><%= song.artist %></a></td>
+          <td><%= artist %></td>
+          <% songs.forEach(function(song) { %>
+          <td><%= song.song_count %></td>
+          <% }) %>
+          <% genres.forEach(function(genre) { %>
+          <td><%= genre.top_genre %></td>
+          <% }) %>
         </tr>
-        <% }) %>
+
       </tbody>
     </table>
 
+
+
+    <p><%= genres.top_genre %></p>
   </div>
 
-  <footer class="bg-dark mt-5" id="sticky-footer" style="height:10em;">
+  <footer class="bg-dark mt-5 fixed-bottom" style=" height:10em;">
     <p class="text-light text-center">Copyright © 2019 - Dion Olympia & Henry Nguyen - All Rights Reserved</p>
     <br />
     <div class="text-center">

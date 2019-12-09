@@ -12,6 +12,7 @@ var path= require('path');
 // File stream module
 var fs = require('fs');
 
+// Set port for server
 var port = 3000;
 
 // Configure Middleware
@@ -30,7 +31,8 @@ const db = mysql.createConnection({
     host: 'cmsc461project.crie639zueql.us-east-1.rds.amazonaws.com',
     user: 'admin',
     password: 'password',
-    database: 'cmsc461project'
+    database: 'cmsc461project',
+    multipleStatements: true
 });
 
 global.db = db;
@@ -82,6 +84,17 @@ app.get('/artist/letter/:letter', (req, res) => {
             console.log(err);
     });
 });
+app.get('/artist/specific/:artist', (req, res) => {
+    QUERY1 = "SELECT COUNT(id) as `song_count` FROM song_data WHERE artist = ?";
+    QUERY2 = "SELECT genre as `top_genre`, COUNT(genre) as `genre_freq` FROM song_data WHERE artist=? GROUP BY genre ORDER BY `genre_freq` DESC LIMIT 1";
+    db.query(QUERY1, [req.params.artist], function(err, result1) {
+      db.query(QUERY2, [req.params.artist], function(err, result2) {
+        console.log(result1);
+        console.log(result2);
+        res.render('artistspecific', {artist: req.params.artist, songs : result1, genres: result2});
+      });
+    });
+});
 app.get('/artistpage', artistpage);
 
 // GENRE PAGES
@@ -98,23 +111,17 @@ app.get('/genrepage', genrepage);
 // YEAR PAGES
 app.get('/year/search/:year', (req, res) => {
   if(!req.params.year){
-
     // If year is blank, redirect to same page
     res.redirect('/');
-
   }
   else{
-
     db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE year = ? LIMIT 10', [req.params.year], (err, results) => {
         if (!err)
             res.render('year', {years :results});
         else
             console.log(err);
     });
-
   }
-
-
 });
 app.get('/yearpage', yearpage);
 
