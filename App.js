@@ -106,8 +106,9 @@ app.get('/artist/specific/:artist', (req, res) => {
 app.get('/artistpage', artistpage);
 
 // GENRE PAGES
-app.get('/genre/:genre', (req, res) => {
-    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE genre = ? LIMIT 10 OFFSET 10', [req.params.genre], (err, results) => {
+app.get('/genre/:genre/:page', (req, res) => {
+    console.log(typeof req.params.page);
+    db.query('SELECT id as `id`, title as `title`, year as `year`, artist as `artist`, genre as `genre`, lyrics as `lyrics` FROM song_data WHERE genre = ? LIMIT 10 OFFSET ?;', [req.params.genre, parseInt(req.params.page, 10) * 10], (err, results) => {
         if (!err)
             res.render('genre', {genres :results});
         else
