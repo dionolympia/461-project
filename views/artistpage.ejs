@@ -9,8 +9,14 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <style media="screen">
-  </style>
+  <script type="text/javascript">
+    function yourFunction(){
+      var search = document.getElementsByName("keywords")[0].value;
+      search = search.replace(/\s+/g, '-');
+      var action_src = "http://localhost:3000/artist/search/" + search;
+      your_form.action = action_src ;
+    }
+  </script>
 </head>
 
 <body class="bg-light">
@@ -21,13 +27,12 @@
 
     <h1 class="display-3">Artists</h1>
 
-    <form>
-      <div class="form-group ml-5 mr-5">
-        <label for="usr">Type artist name:</label>
-        <input type="text" class="form-control" id="usr">
-        <button type="submit" class="btn btn-secondary mt-1">Submit</button>
-      </div>
+    <form method="GET" id = "your_form" onsubmit="yourFunction()">
+      <input type="text" name="keywords">
+      <input class="btn-secondary" type="submit" value="Search">
     </form>
+
+    <br/>
 
     <p>Or pick alphabetically:</p>
 
@@ -36,22 +41,22 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/A">
               <li class="list-group-item">A</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/B">
               <li class="list-group-item">B</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/C">
               <li class="list-group-item">C</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/D">
               <li class="list-group-item">D</li>
             </a>
           </div>
@@ -59,22 +64,22 @@
         <br />
         <div class="row">
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/E">
               <li class="list-group-item">E</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/F">
               <li class="list-group-item">F</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/G">
               <li class="list-group-item">G</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/H">
               <li class="list-group-item">H</li>
             </a>
           </div>
@@ -82,22 +87,22 @@
         <br />
         <div class="row">
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/I">
               <li class="list-group-item">I</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/J">
               <li class="list-group-item">J</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/K">
               <li class="list-group-item">K</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/L">
               <li class="list-group-item">L</li>
             </a>
           </div>
@@ -105,22 +110,22 @@
         <br />
         <div class="row">
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/M">
               <li class="list-group-item">M</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/N">
               <li class="list-group-item">N</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/O">
               <li class="list-group-item">O</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/P">
               <li class="list-group-item">P</li>
             </a>
           </div>
@@ -128,22 +133,22 @@
         <br />
         <div class="row">
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/Q">
               <li class="list-group-item">Q</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/R">
               <li class="list-group-item">R</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/S">
               <li class="list-group-item">S</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/T">
               <li class="list-group-item">T</li>
             </a>
           </div>
@@ -151,22 +156,22 @@
         <br />
         <div class="row">
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/U">
               <li class="list-group-item">U</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/V">
               <li class="list-group-item">V</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/W">
               <li class="list-group-item">W</li>
             </a>
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/X">
               <li class="list-group-item">X</li>
             </a>
           </div>
@@ -176,14 +181,14 @@
           <div class="col-sm-2">
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/Y">
               <li class="list-group-item">Y</li>
             </a>
           </div>
           <div class="col-sm-2">
           </div>
           <div class="col-sm-3">
-            <a href="">
+            <a href="/artist/letter/Z">
               <li class="list-group-item">Z</li>
             </a>
           </div>

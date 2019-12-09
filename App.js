@@ -67,9 +67,17 @@ app.get('/titlepage', titlepage);
 
 // ARTIST PAGES
 app.get('/artist/search/:artist', (req, res) => {
-    db.query('SELECT artist as `artist` FROM song_data WHERE artist LIKE ?', ["%"+req.params.artist+"%"], (err, results) => {
+    db.query('SELECT DISTINCT artist as `artist` FROM song_data WHERE artist LIKE ?', ["%"+req.params.artist+"%"], (err, results) => {
         if (!err)
-            res.render('artist', {artist:results});
+            res.render('artist', {artists:results});
+        else
+            console.log(err);
+    });
+});
+app.get('/artist/letter/:letter', (req, res) => {
+    db.query('SELECT DISTINCT artist as `artist` FROM song_data WHERE artist LIKE ? ORDER BY artist', [req.params.letter+"%"], (err, results) => {
+        if (!err)
+            res.render('artist', {artists:results});
         else
             console.log(err);
     });
