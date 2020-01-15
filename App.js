@@ -31,7 +31,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'tester',
+    database: 'cmsc461project',
     multipleStatements: true
 });
 
@@ -68,21 +68,46 @@ app.get('/title/search/:title', (req, res) => {
 app.get('/titlepage', titlepage);
 
 // ARTIST PAGES
-app.get('/artist/search/:artist', (req, res) => {
-    db.query('SELECT DISTINCT artist as `artist` FROM lyrics WHERE artist LIKE ? ORDER BY artist', ["%"+req.params.artist+"%"], (err, results) => {
-        if (!err)
-            res.render('artist', {artists:results});
-        else
-            console.log(err);
-    });
+app.get('/artist/search/:artist/:page', (req, res) => {
+
+    if(req.params.page < 0){
+      db.query('SELECT DISTINCT artist as `artist` FROM lyrics WHERE artist LIKE ? LIMIT 10 OFFSET ?', ["%"+req.params.artist+"%" , (parseInt(req.params.page, 10) + 1) * 10], (err, results) => {
+          if (!err)
+              res.render('artist-search-results', {artists:results, currartist: req.params.artist, pagenumber: req.params.page});
+          else
+              console.log(err);
+      });
+    }
+    else{
+      db.query('SELECT DISTINCT artist as `artist` FROM lyrics WHERE artist LIKE ? LIMIT 10 OFFSET ?', ["%"+req.params.artist+"%" , parseInt(req.params.page, 10) * 10],(err, results) => {
+          if (!err)
+              res.render('artist-search-results', {artists:results, currartist: req.params.artist, pagenumber: req.params.page});
+          else
+              console.log(err);
+      });
+    }
+
 });
-app.get('/artist/letter/:letter', (req, res) => {
-    db.query('SELECT DISTINCT artist as `artist` FROM lyrics WHERE artist LIKE ? ORDER BY artist', [req.params.letter+"%"], (err, results) => {
-        if (!err)
-            res.render('artist', {artists:results});
-        else
-            console.log(err);
-    });
+app.get('/artist/letter/:letter/:page', (req, res) => {
+
+    if(req.params.page < 0){
+      db.query('SELECT DISTINCT artist as `artist` FROM lyrics WHERE artist LIKE ? LIMIT 10 OFFSET ?', [req.params.letter+"%" , (parseInt(req.params.page, 10) + 1) * 10], (err, results) => {
+          if (!err)
+              res.render('artist-letter-results', {artists:results, currletter: req.params.letter, pagenumber: req.params.page});
+          else
+              console.log(err);
+      });
+    }
+    else{
+      db.query('SELECT DISTINCT artist as `artist` FROM lyrics WHERE artist LIKE ? LIMIT 10 OFFSET ?', [req.params.letter+"%" , parseInt(req.params.page, 10) * 10],(err, results) => {
+          if (!err)
+              res.render('artist-letter-results', {artists:results, currletter: req.params.letter, pagenumber: req.params.page});
+          else
+              console.log(err);
+      });
+    }
+
+
 });
 app.get('/artist/specific/:artist', (req, res) => {
     QUERY1 = "SELECT COUNT(id) as `song_count` FROM lyrics WHERE artist = ?";
